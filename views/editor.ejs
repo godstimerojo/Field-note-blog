@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+  <section class="editor-wrap">
+    <a class="back-link" href="/">← Back to all posts</a>
+    <p class="eyebrow"><%= post && post.id ? 'Revise a note' : 'New note' %></p>
+    <h1><%= post && post.id ? 'Give it another look.' : 'What is on your mind?' %></h1>
+    <p class="editor-intro">Write without worrying about getting it perfect. You can return and edit any time.</p>
+
+    <% if (error) { %><p class="error" role="alert"><%= error %></p><% } %>
+    <form class="post-form" action="<%= post && post.id ? '/posts/' + post.id : '/posts' %>" method="POST">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" value="<%= post ? post.title : '' %>" placeholder="Give your thought a name" maxlength="120" required autofocus />
+      <label for="content">Your note</label>
+      <textarea id="content" name="content" rows="10" placeholder="Begin here..." required><%= post ? post.content : '' %></textarea>
+      <div class="form-footer">
+        <p>Saved in this browser session only.</p>
+        <button class="button" type="submit"><%= post && post.id ? 'Save changes' : 'Publish post' %> <span aria-hidden="true">↗</span></button>
+      </div>
+    </form>
+  </section>
+<%- include('partials/footer') %>
